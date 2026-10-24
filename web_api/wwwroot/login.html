@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        #left{
+            display:none
+        }
+        #show_logup {
+            color: blue;
+        }
+        body{
+            display:flex;
+            flex-direction:row;
+            gap:40px;
+            padding:150px;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div id="right">
+        <div><input id="logemail" type="email" />email</div>
+        <br />
+        <div><input id="logpassword" type="password" />password </div>
+        <br />
+        <button id="login_but" onclick="log_in()">log in</button>
+        <p id="show_logup" onclick="show_logup()">new user?</p>
+    </div>
+
+    <div id="left">
+        <div><input id="email" type="email" />email</div>
+        <br />
+        <div><input id="password" type="password" />  password </div>
+        <br />
+        <div><input id="first_name" />  first name </div>
+        <br />
+        <div><input id="last_name"/>  last name </div>
+        <br />
+        <button id="logup_but" onclick="log_up()">log up</button>
+    </div>
+</body>
+</html>
+<script src="login.js"></script>

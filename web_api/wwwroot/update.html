@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+    #update {
+        display: none
+    }
+
+    #show_update {
+        color: blue;
+    }
+ 
+
+</style>
+</head>
+
+<body>
+   
+    <div id="text">text</div>
+    <button onclick="show_update()">לעדכון פרטים אישיים</button>
+
+    <div id="update">
+        <div><input id="updateEmail" type="email" /> email</div>
+        <br />
+        <div><input id="updatePassword" type="password" /> password </div>
+        <br />
+        <div><input id="updateFirstName" /> first name </div>
+        <br />
+        <div><input id="updateLastName" /> last name </div>
+        <br />
+        <button id="update_but" onclick="update_user()"> לחץ כאן לעידכון</button>
+     
+
+    </div>
+</body>
+</html>
+<script src="login.js"></script>
