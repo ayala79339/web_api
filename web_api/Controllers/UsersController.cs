@@ -9,25 +9,29 @@ namespace web_api.Controllers
     {
 
         [HttpPut("{id}")]
-        public ActionResult<Users> Put([FromQuery]int id,[FromBody] Users user)
+        public ActionResult<Users> Put([FromQuery]int id,[FromBody] Users userToUpdate)
         {
-            using (StreamReader reader = System.IO.File.OpenText(FilePath))
+            string textToReplace = string.Empty;
+            using (StreamReader reader =System.IO.File.OpenText(FilePath))
+
             {
-                string? currentUserInFile;
+                string currentUserInFile;
                 while ((currentUserInFile = reader.ReadLine()) != null)
                 {
-                    Users userToChange =JsonSerializer.Deserialize<Users>(currentUserInFile);
-                    if (userToChange.Id == id)
-                    {
-                        userToChange.Email = user.Email;
-                        userToChange.Password = user.Password;
-                        userToChange.First_name = user.First_name;
-                        userToChange.Last_name = user.Last_name;
-                    }
-                    return Ok(userToChange);
+                    Users curruser =JsonSerializer.Deserialize<Users>(currentUserInFile);
+
+                    if (curruser.Id == id)
+                        textToReplace = currentUserInFile;
                 }
             }
-            return NotFound();
+            if (textToReplace != string.Empty)
+            {
+                string text = System.IO.File.ReadAllText(FilePath);
+                text = text.Replace(textToReplace,JsonSerializer.Serialize(userToUpdate));
+
+                System.IO.File.WriteAllText(FilePath, text);
+            }
+            return Ok(userToUpdate);
 
         }
 

@@ -46,11 +46,10 @@ const log_in = async () => {
     const response = await fetch('/users/loginpost',
         { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(LogDataToPost) })
 
-    if (response.ok) {
+    if (response.status==200) {
         const response_data = await response.json()
         localStorage.setItem('current user' ,JSON.stringify(response_data))
-        window.location.href = "update.html";
-       
+        window.location.href = "update.html";       
     }
     else
         alert(response.status)

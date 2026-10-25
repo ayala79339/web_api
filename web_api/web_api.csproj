@@ -12,4 +12,8 @@
     <None Include="wwwroot\update.html" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="zxcvbn-core" Version="7.0.92" />
+  </ItemGroup>
+
 </Project>
