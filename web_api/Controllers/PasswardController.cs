@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
+using Zxcvbn;  
 namespace web_api.Controllers
 {
-    using Zxcvbn;    
+    [ApiController]
+    [Route("[controller]")]
+    
     public class PasswardController : Controller
     {
+           
         // GET: PasswardController
         public ActionResult Index()
         {
@@ -47,7 +50,7 @@ namespace web_api.Controllers
 
         // POST: PasswardController/Edit/5
         [HttpPost("check_strengh")] 
-        public int check_straingh([FromBody]string passward )
+        public int check_straingh([FromBody] string passward )
         {
             if (passward == null)
                 return -1;

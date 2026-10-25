@@ -17,8 +17,8 @@
 </head>
 
 <body>
-   
-    <div id="text">text</div>
+
+    <div id="text"> </div>
     <button onclick="show_update()">לעדכון פרטים אישיים</button>
 
     <div id="update">
@@ -31,9 +31,11 @@
         <div><input id="updateLastName" /> last name </div>
         <br />
         <button id="update_but" onclick="update_user()"> לחץ כאן לעידכון</button>
-     
-
     </div>
+    <br />
+    <br />
+    <button onclick="check_pass()">לבדיקת חוזק סיסמא</button>
+    <div id="pass_strengh"></div>
 </body>
 </html>
 <script src="login.js"></script>

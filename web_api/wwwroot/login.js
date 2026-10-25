@@ -5,8 +5,11 @@ const updatebut = document.getElementById("update_but")
 const left = document.getElementById("left")
 const update = document.getElementById("update")
 const text = document.getElementById("text")
+const pass_strengh = document.getElementById("pass_strengh")
 
-
+const curr_user = JSON.parse(localStorage.getItem('current user'));
+if (text)
+    text.innerHTML = `hello and wellcome ${curr_user.first_name} ${curr_user.last_name}`
 
 const show_logup =() => {
     left.style.display='block'
@@ -28,7 +31,10 @@ const log_up = async () => {
     const response = await fetch('/users/loguppost',
         { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(DataToPost) })
     if (response.ok)
+    {
         throw ("המשתמש נרשם בהצלחה!")
+       
+    }
     else
         throw (`יש בעיה!-קוד שגיאה: ${response.status}`)
 }
@@ -48,7 +54,8 @@ const log_in = async () => {
 
     if (response.status==200) {
         const response_data = await response.json()
-        localStorage.setItem('current user' ,JSON.stringify(response_data))
+        localStorage.setItem('current user', JSON.stringify(response_data))
+        
         window.location.href = "update.html";       
     }
     else
@@ -58,27 +65,38 @@ const log_in = async () => {
   }
    
 async function update_user() {
+
+    const dataToUpdate = {
+        email: document.getElementById("updateEmail").value,
+        password: document.getElementById("updatePassword").value,
+        first_name: document.getElementById("updateFirstName").value,
+        last_name: document.getElementById("updateLastName").value
+    }   
+
+    const id = curr_user.id
+
+    const response = await fetch('users/id',
+        { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(dataToUpdate) }
+    )
+    if (response.ok)
+        alert("הפרטים עודכנו בהצלחה!")
+
+    else
+        alert("משהו השתבש בדרך-נסה שנית!")
+
+}
+ 
+
+async function check_pass()
+{
     
-      const dataToUpdate = {
-                email: document.getElementById("updateEmail").value,
-                password: document.getElementById("updatePassword").value,
-                first_name: document.getElementById("updateFirstName").value,
-                last_name: document.getElementById("updateLastName").value
-    }    
-    const curr_user = JSON.parse(localStorage.getItem('current user'));
-
-    const id=curr_user.id
-     
-           const response = await fetch('users/id',
-                { method: 'PUT', headers: { 'Content-Type': 'application/json' },body:JSON.stringify(dataToUpdate) }
-           )
-            if (response.ok)
-              alert("הפרטים עודכנו בהצלחה!")
-
-            else
-               alert ("משהו השתבש בדרך-נסה שנית!")
+    const response = await fetch('passward/check_strengh', { method: 'post', headers: { 'content-Type': 'application/json' }, body: JSON.stringify(curr_user.password) })
+    if (response.ok) {
+        score = await response.json();
         
-       
+        pass_strengh.innerHTML = `password strengh: ${score}`;
     }
-    
+    else
+        pass_strengh.innerHTML = `cannwt check password strengh! try again`;
 
+}
