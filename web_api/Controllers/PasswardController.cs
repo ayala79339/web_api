@@ -6,6 +6,7 @@ namespace web_api.Controllers
     [ApiController]
     [Route("[controller]")]
     
+    //Spelling: Password (PasswordController, password, CheckStrength)
     public class PasswardController : Controller
     {
            
@@ -50,6 +51,7 @@ namespace web_api.Controllers
 
         // POST: PasswardController/Edit/5
         [HttpPost("check_strengh")] 
+        //In C#, method names are written in PascalCase without underscores, for example CheckStrength
         public int check_straingh([FromBody] string passward )
         {
             if (passward == null)
