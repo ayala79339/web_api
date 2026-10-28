@@ -5,11 +5,14 @@ namespace web_api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    //In C#, class names are written in PascalCase: UsersController
     public class usersController : ControllerBase
     {
 
         [HttpPut("{id}")]
-        public ActionResult<Users> Put([FromQuery]int id,[FromBody] Users userToUpdate)
+        //fix: The id is part of the route ({id}), not the query string, so [FromQuery] is removed.
+        //With [FromQuery], PUT /users/5 got id = 0 and updated the wrong user
+        public ActionResult<Users> Put(int id,[FromBody] Users userToUpdate)
         {
             string textToReplace = string.Empty;
             using (StreamReader reader =System.IO.File.OpenText(FilePath))
@@ -21,11 +24,17 @@ namespace web_api.Controllers
                     Users curruser =JsonSerializer.Deserialize<Users>(currentUserInFile);
 
                     if (curruser.Id == id)
+                    {
                         textToReplace = currentUserInFile;
+                        //fix: Found- break
+                        break;
+                    }
                 }
             }
             if (textToReplace != string.Empty)
             {
+                //fix: Keep the id, otherwise the updated user is saved without it
+                userToUpdate.Id = id;
                 string text = System.IO.File.ReadAllText(FilePath);
                 text = text.Replace(textToReplace,JsonSerializer.Serialize(userToUpdate));
 
@@ -64,13 +73,15 @@ namespace web_api.Controllers
                     Users user =
                     JsonSerializer.Deserialize<Users>(currentUserInFile);
                     if (user.Id == id)
-                        return CreatedAtAction(nameof(Get), new { id = user.Id }, user);
+                        //fix: GET only reads, so it returns 200 Ok and not 201 Created
+                        return Ok(user);
                 }
             }
             return NotFound();
         }
 
-        string FilePath = "Users.txt";
+        //fix: The path never changes, so it can be readonly
+        readonly string FilePath = "Users.txt";
         [HttpPost("loguppost")]
         public ActionResult<Users> Post([FromBody] Users user)
         {
