@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
-
+using Entities;
 namespace web_api.Controllers
 {
     [ApiController]
@@ -9,7 +9,7 @@ namespace web_api.Controllers
     {
 
         [HttpPut("{id}")]
-        public ActionResult<Users> Put([FromQuery]int id,[FromBody] Users userToUpdate)
+        public ActionResult<User> Put([FromQuery]int id,[FromBody] User userToUpdate)
         {
             string textToReplace = string.Empty;
             using (StreamReader reader =System.IO.File.OpenText(FilePath))
@@ -18,7 +18,7 @@ namespace web_api.Controllers
                 string currentUserInFile;
                 while ((currentUserInFile = reader.ReadLine()) != null)
                 {
-                    Users curruser =JsonSerializer.Deserialize<Users>(currentUserInFile);
+                    User curruser =JsonSerializer.Deserialize<User>(currentUserInFile);
 
                     if (curruser.Id == id)
                         textToReplace = currentUserInFile;
@@ -54,15 +54,15 @@ namespace web_api.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Users> Get(int id )
+        public ActionResult<User> Get(int id )
         { 
            using (StreamReader reader = System.IO.File.OpenText(FilePath))
             {
                 string? currentUserInFile;
                 while ((currentUserInFile = reader.ReadLine()) != null)
                 {
-                    Users user =
-                    JsonSerializer.Deserialize<Users>(currentUserInFile);
+                    User user =
+                    JsonSerializer.Deserialize<User>(currentUserInFile);
                     if (user.Id == id)
                         return CreatedAtAction(nameof(Get), new { id = user.Id }, user);
                 }
@@ -72,7 +72,7 @@ namespace web_api.Controllers
 
         string FilePath = "Users.txt";
         [HttpPost("loguppost")]
-        public ActionResult<Users> Post([FromBody] Users user)
+        public ActionResult<User> Post([FromBody] User user)
         {
 
             int numberOfUsers = System.IO.File.ReadLines(FilePath).Count();
@@ -84,7 +84,7 @@ namespace web_api.Controllers
         }
 
         [HttpPost("loginpost")]
-        public ActionResult<Users> Post([FromBody] UsersLog usersLog)
+        public ActionResult<User> Post([FromBody] UserLog userLog)
         {
             using (StreamReader reader = System.IO.File.OpenText(FilePath))
 
@@ -92,9 +92,9 @@ namespace web_api.Controllers
                 string? currentUserInFile;
                 while ((currentUserInFile = reader.ReadLine()) != null)
                 {
-                    Users user = JsonSerializer.Deserialize<Users>(currentUserInFile);
+                    User user = JsonSerializer.Deserialize<User>(currentUserInFile);
 
-                    if (user.Email == usersLog.Email && user.Password == usersLog.Password)
+                    if (user.Email == userLog.Email && user.Password == userLog.Password)
 
                         return Ok(user);
                 }

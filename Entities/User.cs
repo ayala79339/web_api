@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace web_api
+namespace Entities
 {
-    public class Users
+    public class User
     {
         [EmailAddress]
         public string Email { get; set; }
@@ -15,14 +15,6 @@ namespace web_api
         [Required]
         public int Id { get; set; }
 
-    }
-    public class UsersLog
-    {
-        [Required]
-        public string Email { get; set; }
-        [Required]
-        public string Password { get; set; }
-        
 
     }
 }
