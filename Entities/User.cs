@@ -9,9 +9,9 @@ namespace Entities
         [Required]
         public string Password { get; set; }
         [Required]
-        public string First_name { get; set; }
+        public string FirstName { get; set; }
         [Required]
-        public string Last_name { get; set; }
+        public string LastName { get; set; }
         [Required]
         public int Id { get; set; }
 

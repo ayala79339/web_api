@@ -9,7 +9,7 @@ const pass_strengh = document.getElementById("pass_strengh")
 
 const curr_user = JSON.parse(localStorage.getItem('current user'));
 if (text)
-    text.innerHTML = `hello and wellcome ${curr_user.first_name} ${curr_user.last_name}`
+    text.innerHTML = `hello and wellcome ${curr_user.firstName} ${curr_user.lastName}`
 
 const show_logup =() => {
     left.style.display='block'
@@ -23,8 +23,8 @@ const log_up = async () => {
     const DataToPost = {
         email: document.getElementById("email").value,
         password: document.getElementById("password").value,
-        first_name: document.getElementById("first_name").value,
-        last_name: document.getElementById("last_name").value
+        firstName: document.getElementById("first_name").value,
+        lastName: document.getElementById("last_name").value
 
     }
 
@@ -39,7 +39,7 @@ const log_up = async () => {
         throw (`יש בעיה!-קוד שגיאה: ${response.status}`)
 }
     catch (e) {
-        alert(e.message)
+        alert(e)
     }
 }
 
@@ -69,8 +69,8 @@ async function update_user() {
     const dataToUpdate = {
         email: document.getElementById("updateEmail").value,
         password: document.getElementById("updatePassword").value,
-        first_name: document.getElementById("updateFirstName").value,
-        last_name: document.getElementById("updateLastName").value
+        firstName: document.getElementById("updateFirstName").value,
+        lastName: document.getElementById("updateLastName").value
     }   
 
     const id = curr_user.id
@@ -90,13 +90,13 @@ async function update_user() {
 async function check_pass()
 {
     
-    const response = await fetch('passward/check_strengh', { method: 'post', headers: { 'content-Type': 'application/json' }, body: JSON.stringify(curr_user.password) })
+    const response = await fetch('password/check_strengh', { method: 'post', headers: { 'content-Type': 'application/json' }, body: JSON.stringify(curr_user.password) })
     if (response.ok) {
         score = await response.json();
         
         pass_strengh.innerHTML = `password strengh: ${score}`;
     }
     else
-        pass_strengh.innerHTML = `cannwt check password strengh! try again`;
+        pass_strengh.innerHTML = `can not check password strengh! try again`;
 
 }

@@ -5,11 +5,11 @@ namespace web_api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class usersController : ControllerBase
+    public class UsersController : ControllerBase
     {
 
         [HttpPut("{id}")]
-        public ActionResult<User> Put([FromQuery]int id,[FromBody] User userToUpdate)
+        public ActionResult<User> Put(int id,[FromBody] User userToUpdate)
         {
             string textToReplace = string.Empty;
             using (StreamReader reader =System.IO.File.OpenText(FilePath))
@@ -21,11 +21,16 @@ namespace web_api.Controllers
                     User curruser =JsonSerializer.Deserialize<User>(currentUserInFile);
 
                     if (curruser.Id == id)
+                    {
                         textToReplace = currentUserInFile;
+                        break;
+                    }
+                       
                 }
             }
             if (textToReplace != string.Empty)
             {
+                userToUpdate.Id = id;
                 string text = System.IO.File.ReadAllText(FilePath);
                 text = text.Replace(textToReplace,JsonSerializer.Serialize(userToUpdate));
 
@@ -64,13 +69,13 @@ namespace web_api.Controllers
                     User user =
                     JsonSerializer.Deserialize<User>(currentUserInFile);
                     if (user.Id == id)
-                        return CreatedAtAction(nameof(Get), new { id = user.Id }, user);
+                        return Ok(user);
                 }
             }
             return NotFound();
         }
 
-        string FilePath = "Users.txt";
+        readonly string FilePath = "Users.txt";
         [HttpPost("loguppost")]
         public ActionResult<User> Post([FromBody] User user)
         {

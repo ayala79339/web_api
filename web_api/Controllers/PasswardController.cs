@@ -6,7 +6,7 @@ namespace web_api.Controllers
     [ApiController]
     [Route("[controller]")]
     
-    public class PasswardController : Controller
+    public class PasswordController : Controller
     {
            
         // GET: PasswardController
@@ -50,7 +50,7 @@ namespace web_api.Controllers
 
         // POST: PasswardController/Edit/5
         [HttpPost("check_strengh")] 
-        public int check_straingh([FromBody] string passward )
+        public int CheckStraingh([FromBody] string passward )
         {
             if (passward == null)
                 return -1;
