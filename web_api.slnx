@@ -1,4 +1,6 @@
 <Solution>
-  <Project Path="Entities/Entities.csproj" Id="68a6af7b-e5a2-44dd-9eb7-4b13627763e9" />
-  <Project Path="web_api/web_api.csproj" />
+  <Project Path="F:/מחשבים/web_api/Entities/Entities.csproj" Id="68a6af7b-e5a2-44dd-9eb7-4b13627763e9" />
+  <Project Path="F:/מחשבים/web_api/Repositories/Repositories.csproj" Id="227cb7ea-000d-4cc6-9346-5803d4204d5f" />
+  <Project Path="F:/מחשבים/web_api/Services/Services.csproj" Id="147c7634-42c8-47da-8d89-22362fda9554" />
+  <Project Path="F:/מחשבים/web_api/web_api/web_api.csproj" />
 </Solution>

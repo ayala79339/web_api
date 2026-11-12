@@ -1,3 +1,6 @@
+using Repositories;
+using Services;
+
 namespace web_api
 { 
     public class Program
@@ -10,6 +13,9 @@ namespace web_api
 
             builder.Services.AddControllers();
 
+            builder.Services.AddScoped<IUserRepository,UserRepository>();
+            builder.Services.AddScoped<IUserService, UserService>();
+            //builder.Services.AddScoped<IPasswordService, PasswordService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
