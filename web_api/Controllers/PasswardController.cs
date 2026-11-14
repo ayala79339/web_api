@@ -6,6 +6,7 @@ namespace web_api.Controllers
     [ApiController]
     [Route("[controller]")]
     
+    //In C#, each file is named after the type it declares: this file should be PasswordController.cs
     public class PasswordController : Controller
     {
            
