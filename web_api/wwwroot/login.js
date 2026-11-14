@@ -7,6 +7,7 @@ const update = document.getElementById("update")
 const text = document.getElementById("text")
 const pass_strengh = document.getElementById("pass_strengh")
 
+//In JavaScript, names are camelCase: currUser, passStrengh, logupBut
 const curr_user = JSON.parse(localStorage.getItem('current user'));
 if (text)
     text.innerHTML = `hello and wellcome ${curr_user.firstName} ${curr_user.lastName}`
@@ -75,6 +76,7 @@ async function update_user() {
 
     const id = curr_user.id
 
+    //This URL sends the text id, not the user's id: how can it use the id variable from the line above?
     const response = await fetch('users/id',
         { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(dataToUpdate) }
     )
@@ -92,6 +94,7 @@ async function check_pass()
     
     const response = await fetch('password/check_strengh', { method: 'post', headers: { 'content-Type': 'application/json' }, body: JSON.stringify(curr_user.password) })
     if (response.ok) {
+        //Is score declared anywhere? It is used here without being defined
         score = await response.json();
         
         pass_strengh.innerHTML = `password strengh: ${score}`;

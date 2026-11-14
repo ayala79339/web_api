@@ -20,6 +20,8 @@ namespace web_api.Controllers
         [HttpPut("{id}")]
         public ActionResult<User> Put(int id,[FromBody] User userToUpdate)
         {
+            //fix: the id from the URL is set on the user, so the right user is updated
+            userToUpdate.Id = id;
             User user = _userService.UpdateUser(userToUpdate);         
 
             return Ok(user);
@@ -50,6 +52,7 @@ namespace web_api.Controllers
             return CreatedAtAction(nameof(Get), new { id = addedUser.Id }, addedUser);
         }
 
+        //The assignment asks login with a wrong password to return 204: what does this return when the login fails?
         [HttpPost("loginpost")]
         public ActionResult<User> Post([FromBody] UserLog userLog)
         {
