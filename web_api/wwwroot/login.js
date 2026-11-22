@@ -5,6 +5,7 @@ const updatebut = document.getElementById("update_but")
 const left = document.getElementById("left")
 const update = document.getElementById("update")
 const text = document.getElementById("text")
+//In JavaScript, names are camelCase: passStrengh (the id in update.html stays pass_strengh)
 const pass_strengh = document.getElementById("pass_strengh")
 
 const curr_user = JSON.parse(localStorage.getItem('current user'));
@@ -75,6 +76,7 @@ async function update_user() {
 
     const id = curr_user.id
 
+    //Is the id from curr_user used in this URL? The URL should contain the id, and the route of PUT must match it
     const response = await fetch('users/id',
         { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(dataToUpdate) }
     )
@@ -92,6 +94,7 @@ async function check_pass()
     
     const response = await fetch('password/check_strengh', { method: 'post', headers: { 'content-Type': 'application/json' }, body: JSON.stringify(curr_user.password) })
     if (response.ok) {
+        //Where is score declared? It is used here without a declaration
         score = await response.json();
         
         pass_strengh.innerHTML = `password strengh: ${score}`;

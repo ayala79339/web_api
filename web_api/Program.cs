@@ -15,6 +15,7 @@ namespace web_api
 
             builder.Services.AddScoped<IUserRepository,UserRepository>();
             builder.Services.AddScoped<IUserService, UserService>();
+            //Why is this registration commented out? UsersController takes IPasswordService, so the app can't start without it
             //builder.Services.AddScoped<IPasswordService, PasswordService>();
             var app = builder.Build();
 

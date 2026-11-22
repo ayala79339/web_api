@@ -50,6 +50,7 @@ namespace web_api.Controllers
 
         // POST: PasswardController/Edit/5
         [HttpPost("check_strengh")] 
+        //The assignment asks this controller to take IPasswordService and call it: which service method should this use instead of Zxcvbn directly?
         public int CheckStraingh([FromBody] string passward )
         {
             if (passward == null)
