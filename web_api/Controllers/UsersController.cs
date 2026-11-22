@@ -18,19 +18,17 @@ namespace web_api.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult<User> Put(int id,[FromBody] User userToUpdate)
+        public async Task Put(int id, [FromBody] User userToUpdate)
         {
-            User user = _userService.UpdateUser(userToUpdate);         
-
-            return Ok(user);
+            await _userService.UpdateUser(id,userToUpdate);           
         }
 
   
 
         [HttpGet("{id}")]
-        public ActionResult<User> Get(int id )
+        public async Task<ActionResult<User>> Get(int id )
         {
-            User user = _userService.GetUserById(id);
+            var user = await _userService.GetUserById(id);
             if (user == null)
                 return NotFound();
             return Ok(user);    
@@ -39,21 +37,21 @@ namespace web_api.Controllers
 
         
         [HttpPost("loguppost")]
-        public ActionResult<User> Post([FromBody] User user)
+        public async Task<ActionResult<User>> Post([FromBody] User user)
         {   int strengh = _passwordService.GetStrength(user.Password);
-            if (strengh < 3)
+            if (strengh < 1)
             {
                 return BadRequest("Password is too weak");
             }
-            var addedUser = _userService.AddUser(user);
+            var addedUser = await _userService.AddUser(user);
          
             return CreatedAtAction(nameof(Get), new { id = addedUser.Id }, addedUser);
         }
 
         [HttpPost("loginpost")]
-        public ActionResult<User> Post([FromBody] UserLog userLog)
+        public async Task<ActionResult<User>> Post([FromBody] UserLog userLog)
         {
-            var user = _userService.Login(userLog);
+            var user = await _userService.Login(userLog);
             if (user == null)
                 return NotFound();
             return Ok(user);

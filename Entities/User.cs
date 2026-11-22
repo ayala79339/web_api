@@ -12,7 +12,7 @@ namespace Entities
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
-        [Required]
+        [Key]
         public int Id { get; set; }
 
 

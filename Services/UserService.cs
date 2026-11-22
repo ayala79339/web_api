@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿
 using Entities;
 using Repositories;
 
@@ -11,24 +9,23 @@ namespace Services
         private readonly IUserRepository _repo;
         public UserService(IUserRepository repo) => _repo = repo;
 
-        public User Login(UserLog log)
+        public async Task<User?> Login(UserLog log)
         {
-            var user = _repo.GetByEmail(log.Email);
+            var user = await _repo.GetByEmail(log.Email);
             return user;
         }
-        public User GetUserById(int id)
+        public async Task<User?> GetUserById(int id)
         {
-            var user = _repo.GetById(id);
+            var user = await _repo.GetById(id);
             return user;
         }
-        public User UpdateUser(User user)
+        public async Task UpdateUser(int id,User user)
         {
-            var updatedUser = _repo.Update(user);
-            return updatedUser;
+            await _repo.Update(id,user);             
         }
-        public User AddUser(User user)
+        public async Task<User?> AddUser(User user)
         {
-            var addedUser = _repo.AddUser(user);
+            var addedUser = await _repo.AddUser(user);
             return addedUser;
         }
     }

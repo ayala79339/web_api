@@ -7,10 +7,10 @@ using System.Text;
     {
         public interface IUserRepository
         {
-             User GetById(int id);           
-             User GetByEmail(string email);
-             User AddUser(User user);
-             User Update(User user);
+             Task<User?> GetById(int id);           
+             Task<User?> GetByEmail(string email);
+             Task<User?> AddUser(User user);
+             Task Update(int id, User userToUpdate);
          
         }
     }

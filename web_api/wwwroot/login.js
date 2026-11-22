@@ -75,7 +75,7 @@ async function update_user() {
 
     const id = curr_user.id
 
-    const response = await fetch('users/id',
+    const response = await fetch(`/users/${id}`,
         { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(dataToUpdate) }
     )
     if (response.ok)
