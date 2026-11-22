@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+//The Zxcvbn package is referenced only in web_api.csproj: which project needs it so that PasswordService compiles?
 using Zxcvbn;
 namespace Services
 {
@@ -20,4 +21,5 @@ namespace Services
         }
     }
 }
+//Which brace is this? It closes nothing: remove it, or check which class or namespace is missing its opening brace
 }
