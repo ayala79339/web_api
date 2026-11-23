@@ -12,8 +12,7 @@ namespace Repositories
             this.appContext = appContext;
         }
         public async Task<User?> AddUser(User user)
-        {
-             
+        {             
             await appContext.Users.AddAsync(user);
             await appContext.SaveChangesAsync();
             return user;
@@ -23,9 +22,9 @@ namespace Repositories
             return await appContext.Users.FirstOrDefaultAsync(u => u.Email == email);
         }
 
-        public Task<User?> GetById(int id)
+        public async Task<User?> GetById(int id)
         {
-            return appContext.Users.FirstOrDefaultAsync(u => u.Id == id);
+            return await appContext.Users.FirstOrDefaultAsync(u => u.Id == id);
         }
 
         public async Task Update(int id,User userToUpdate)

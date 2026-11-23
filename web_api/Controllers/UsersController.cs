@@ -31,8 +31,7 @@ namespace web_api.Controllers
             var user = await _userService.GetUserById(id);
             if (user == null)
                 return NotFound();
-            return Ok(user);    
-
+            return Ok(user);   
         }
 
         
