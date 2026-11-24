@@ -19,13 +19,23 @@ namespace web_api
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             builder.Services.AddScoped<IUserRepository,UserRepository>();
-
             builder.Services.AddScoped<IUserService, UserService>();
-
             builder.Services.AddScoped<IPasswordService, PasswordService>();
+
+
+            builder.Services.AddOpenApi();
 
             //builder.Services.AddScoped<IPasswordService, PasswordService>();
             var app = builder.Build();
+            if (app.Environment.IsDevelopment())
+            {
+                app.MapOpenApi();
+                app.UseSwaggerUI(options =>
+                {
+                    options.SwaggerEndpoint("/openapi/v1.json", "v1");
+                });
+            }
+
 
             // Configure the HTTP request pipeline.
 

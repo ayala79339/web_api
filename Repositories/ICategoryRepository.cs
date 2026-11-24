@@ -6,7 +6,7 @@ using Entities;
 
 namespace Repositories
 {
-    public interface ICategoryReposetory
+    public interface ICategoryRepository
     {
         public Task<List<Category?>> Get();
     }

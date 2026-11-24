@@ -1,7 +1,7 @@
-using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
+using Microsoft.AspNetCore.Mvc; 
 using Entities;
 using Services;
+
 namespace web_api.Controllers
 {
     [ApiController]

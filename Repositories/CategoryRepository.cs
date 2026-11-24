@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Repositories
 {
-    public class CategoryReposetory : ICategoryReposetory
+    public class CategoryRepository : ICategoryRepository
     {
         readonly AppDbContext appContext;
 
-        public CategoryReposetory(AppDbContext appContext)
+        public CategoryRepository(AppDbContext appContext)
         {
             this.appContext = appContext;
         }

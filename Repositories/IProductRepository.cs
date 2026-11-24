@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Repositories
 {
-    public interface IProductReposetory
+    public interface IProductRepository
     {
         public Task <List<Product?>> Get();
     }
